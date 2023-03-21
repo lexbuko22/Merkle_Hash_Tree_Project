@@ -2,7 +2,7 @@
 // in your homework submission.
 // Chekout TEST_F functions bellow to learn what is being tested.
 #include <gtest/gtest.h>
-// #include "../code_1/<HEADER FILE>.hpp"
+#include "../code_1/HashTree.h"
 
 #include <fstream>
 #include <iostream>
