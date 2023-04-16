@@ -66,11 +66,7 @@ void HashTree :: Insert(std::string key, vector<shared_ptr<hash_tree_node>> &dat
     add_to_data_set(new_node,data_set);
 }
 
-unsigned int HashTree :: Top_Hash(shared_ptr<hash_tree_node> top_hash){
-    return top_hash->hashcode;
-}
-
-//Hash together internal nodes or leaves
+//Helper function to hash together internal nodes or leaves
  vector<shared_ptr<hash_tree_node>> HashTree::hash_nodes_together(vector<shared_ptr<hash_tree_node>> data){
     vector<shared_ptr<hash_tree_node>> new_parents;
     int i = 0; //index of new_parent vector
@@ -91,11 +87,24 @@ unsigned int HashTree :: Top_Hash(shared_ptr<hash_tree_node> top_hash){
     return new_parents;
  }
 
+//Hash all nodes together to create root hash node
 shared_ptr<hash_tree_node> HashTree::create_hash_tree(vector<shared_ptr<hash_tree_node>> data_set){
-
-return NULL;
+   
+    vector<shared_ptr<hash_tree_node>> next_parents;
+    next_parents = hash_nodes_together(data_set);
+    vector<shared_ptr<hash_tree_node>> next_parents_copy = next_parents;
+    while (next_parents.size() > 1)
+    {
+        next_parents.clear();
+        next_parents = hash_nodes_together(next_parents_copy);
+        next_parents_copy = next_parents;
+    }
+    return next_parents[0];
 }
 
+unsigned int HashTree :: Top_Hash(shared_ptr<hash_tree_node> top_hash){
+    return top_hash->hashcode;
+}
 
 
 

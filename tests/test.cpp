@@ -162,6 +162,76 @@ ASSERT_EQ(parent_nodes[2]->left,nullptr);
 ASSERT_EQ(parent_nodes[2]->right,nullptr);
 }
 
+TEST_F(test_x,make_tree){
+HashTree myHashTree;
+vector<shared_ptr<hash_tree_node>> data_set = myHashTree.init_data_set();
+myHashTree.Insert("bananas",data_set);	
+myHashTree.Insert("apples",data_set);
+myHashTree.Insert("chocolate",data_set);
+myHashTree.Insert("ice cream",data_set);
+myHashTree.Insert("hockey",data_set);
+shared_ptr<hash_tree_node> top_node = myHashTree.create_hash_tree(data_set);
+
+ASSERT_EQ(top_node->hashcode,351600701);
+ASSERT_EQ(top_node->key,"applesbananaschocolatehockeyice cream");
+ASSERT_EQ(top_node->is_leaf,false);
+ASSERT_EQ(top_node->left->key,"applesbananaschocolatehockey");
+ASSERT_EQ(top_node->right->key,"ice cream");
+}
+
+TEST_F(test_x,root_hash){
+HashTree myHashTree;
+vector<shared_ptr<hash_tree_node>> data_set = myHashTree.init_data_set();
+myHashTree.Insert("bananas",data_set);	
+myHashTree.Insert("apples",data_set);
+myHashTree.Insert("chocolate",data_set);
+myHashTree.Insert("ice cream",data_set);
+myHashTree.Insert("hockey",data_set);
+shared_ptr<hash_tree_node> top_node = myHashTree.create_hash_tree(data_set);
+unsigned int root_hash = myHashTree.Top_Hash(top_node);
+
+ASSERT_EQ(root_hash,351600701);
+ASSERT_EQ(root_hash,top_node->hashcode);
+}
+
+TEST_F(test_x,full_stack){
+vector<string> data_set_animals = {"dog","cat","cow","pig","horse"};
+HashTree animalHashTree;
+vector<shared_ptr<hash_tree_node>> animal_data_set_nodes = animalHashTree.init_data_set();
+
+for (int i = 0; i < data_set_animals.size(); i++)
+{
+	animalHashTree.Insert(data_set_animals[i],animal_data_set_nodes);
+}
+unsigned int animal_root_hash = animalHashTree.create_hash_tree(animal_data_set_nodes)->hashcode;
+
+
+vector<string> data_set_animals_same = {"dog","cat","cow","horse","pig"};
+HashTree animalHashTree_same;
+vector<shared_ptr<hash_tree_node>> animal_data_set_same_nodes = animalHashTree.init_data_set();
+for (int i = 0; i < data_set_animals_same.size(); i++)
+{
+	animalHashTree_same.Insert(data_set_animals_same[i],animal_data_set_same_nodes);
+}
+unsigned int animal_root_hash_same = animalHashTree_same.create_hash_tree(animal_data_set_same_nodes)->hashcode;
+
+
+vector<string> data_set_sports = {"hockey","football","australian football","basketball","yoga"};
+HashTree sportsHashTree;
+vector<shared_ptr<hash_tree_node>> sports_nodes = sportsHashTree.init_data_set();
+for (int i = 0; i < data_set_sports.size(); i++)
+{
+	sportsHashTree.Insert(data_set_sports[i],sports_nodes);
+}
+unsigned int sports_root_hash = sportsHashTree.create_hash_tree(sports_nodes)->hashcode;
+
+
+ASSERT_EQ(animalHashTree.create_hash_tree(animal_data_set_nodes)->key,"catcowdoghorsepig");
+ASSERT_EQ(animal_root_hash,animal_root_hash_same);
+ASSERT_NE(sports_root_hash,animal_root_hash);
+
+}
+
 // apples hash = 4065158538
 // bananas hash = 1707924825
 // chocolate hash = 1216302135
@@ -170,3 +240,7 @@ ASSERT_EQ(parent_nodes[2]->right,nullptr);
 
 //apples + bananas hash = 2271817439
 // chocolate + hockey = 2618300579
+
+//applesbananas + chocolatehockey = 1899416666
+
+//applesbananaschocolatehockey + ice cream = 351600701
