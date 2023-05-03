@@ -229,8 +229,43 @@ unsigned int sports_root_hash = sportsHashTree.create_hash_tree(sports_nodes)->h
 ASSERT_EQ(animalHashTree.create_hash_tree(animal_data_set_nodes)->key,"catcowdoghorsepig");
 ASSERT_EQ(animal_root_hash,animal_root_hash_same);
 ASSERT_NE(sports_root_hash,animal_root_hash);
+}
+
+TEST_F(test_x,Create_Top_Hash){
+	HashTree myHashTree;
+	unsigned int func_val = myHashTree.Build_Hash_Tree({"hockey","football","australian football","basketball","yoga"});
+	vector<string> data_set_sports = {"hockey","football","australian football","basketball","yoga"};
+	HashTree sportsHashTree;
+	vector<shared_ptr<hash_tree_node>> sports_nodes = sportsHashTree.init_data_set();
+	for (int i = 0; i < data_set_sports.size(); i++)
+	{
+		sportsHashTree.Insert(data_set_sports[i],sports_nodes);
+	}
+	unsigned int sports_root_hash = sportsHashTree.create_hash_tree(sports_nodes)->hashcode;
+
+	ASSERT_EQ(func_val,sports_root_hash);
 
 }
+
+TEST_F(test_x,Is_Identical){
+	HashTree myHashTree;
+	vector<string> sports = {"hockey", "football","soccer", "yoga"};
+	vector<string> sports_2 = {"hockey", "yoga", "soccer", "football"};
+	vector<string> prem_league_teams {"Brentford","The rest don't matter"};
+	vector<string> empty_vec = {};
+	bool test_1 = myHashTree.Identical_Data(sports,sports_2);
+	bool test_2 = myHashTree.Identical_Data(sports, prem_league_teams);
+	bool test_3 = myHashTree.Identical_Data(prem_league_teams,prem_league_teams);
+	bool test_4 = myHashTree.Identical_Data(sports,empty_vec);
+	bool test_5 = myHashTree.Identical_Data(empty_vec,empty_vec);
+
+	ASSERT_TRUE(test_1);
+	ASSERT_FALSE(test_2);
+	ASSERT_TRUE(test_3);
+	ASSERT_FALSE(test_4);
+	ASSERT_TRUE(test_5);
+}
+
 
 // apples hash = 4065158538
 // bananas hash = 1707924825

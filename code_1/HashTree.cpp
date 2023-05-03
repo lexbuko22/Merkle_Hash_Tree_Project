@@ -32,7 +32,7 @@ vector<shared_ptr<hash_tree_node>> HashTree :: init_data_set(){
     return data_set;
 }
 
-//insert helper function to store node in data set in ascending order so that data set of a,b = b,a
+//Helper function to store node in data set in ascending order so that data set of a,b = b,a
 void HashTree :: add_to_data_set(shared_ptr<hash_tree_node> new_data, vector<shared_ptr<hash_tree_node>> &data_set){
     int data_len = data_set.size();
     for (int i = 0; i < data_len; i++)
@@ -105,6 +105,50 @@ shared_ptr<hash_tree_node> HashTree::create_hash_tree(vector<shared_ptr<hash_tre
 unsigned int HashTree :: Top_Hash(shared_ptr<hash_tree_node> top_hash){
     return top_hash->hashcode;
 }
+
+unsigned int HashTree :: Build_Hash_Tree(vector<string> data){
+
+    if (data.empty())
+    {
+        cout << "Please enter data to create the Hash Tree" << endl;
+        return 0;
+    }
+
+    vector<shared_ptr<hash_tree_node>> hash_data = init_data_set();
+
+    for (int i = 0; i < data.size(); i++)
+    {
+	   Insert(data[i],hash_data);
+    }
+
+    unsigned int top_hash = create_hash_tree(hash_data)->hashcode;
+    
+    return top_hash;
+}
+
+bool HashTree :: Identical_Data(vector <string> data_1, vector<string> data_2){
+
+    if (data_1.empty() && data_2.empty())
+    {
+        return true;
+    }
+    
+    else if (data_1.empty() || data_2.empty())
+    {
+        return false;
+    }
+    
+    unsigned int hash_data_1 = Build_Hash_Tree(data_1);
+    unsigned int hash_data_2 = Build_Hash_Tree(data_2);
+
+    if (hash_data_1 == hash_data_2)
+    {
+        return true;
+    }
+    return false;
+}
+
+
 
 
 

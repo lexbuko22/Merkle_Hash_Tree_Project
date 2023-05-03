@@ -70,6 +70,16 @@ public:
   //Inserts a string value into the data set
   void Insert(std::string key, vector<shared_ptr<hash_tree_node>> &data_set);
 
+  //Compares to vectors of string data using the hash tree data structure to determine if the data is identical.
+  //Returns truee if identical, false if not. Data is case sensitive but not order sensative
+  bool Identical_Data(vector <string> data_1, vector<string> data_2);
+
+  //Add_Key allows the user to add a key to the hash tree values and rehash the tree, creating a new
+  //top hash value.
+  unsigned int Build_Hash_Tree(vector<string> key);
+
+  //Create function to see all the keys hashed
+
 
   // you can add add more public member variables and member functions here if you need
 
