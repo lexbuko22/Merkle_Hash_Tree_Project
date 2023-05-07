@@ -38,7 +38,7 @@
             "type": "cppdbg",
             "request": "launch",
             "preLaunchTask": "make project",
-            "program": "${workspaceFolder}/build/run_app",
+            "program": "${workspaceFolder}/build/run_app_1",
             "args": [],
             "stopAtEntry": false,
             "cwd": "${workspaceFolder}/build",
