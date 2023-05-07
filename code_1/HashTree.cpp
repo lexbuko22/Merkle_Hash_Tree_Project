@@ -9,11 +9,73 @@ HashTree::HashTree(){
 HashTree::~HashTree(){
 }
 
+unsigned int HashTree :: Build_Hash_Tree(vector<string> data){
+
+    if (data.empty())
+    {
+        cout << "Please enter data to create the Hash Tree" << endl;
+        return 0;
+    }
+
+    vector<shared_ptr<hash_tree_node>> hash_data = init_data_set();
+
+    for (int i = 0; i < data.size(); i++)
+    {
+	   Insert(data[i],hash_data);
+    }
+
+    unsigned int top_hash = create_hash_tree(hash_data)->hashcode;
+    
+    return top_hash;
+}
+
+bool HashTree :: Identical_Data(vector <string> data_1, vector<string> data_2){
+
+    if (data_1.empty() && data_2.empty())
+    {
+        return true;
+    }
+    
+    else if (data_1.empty() || data_2.empty())
+    {
+        return false;
+    }
+    
+    unsigned int hash_data_1 = Build_Hash_Tree(data_1);
+    unsigned int hash_data_2 = Build_Hash_Tree(data_2);
+
+    if (hash_data_1 == hash_data_2)
+    {
+        return true;
+    }
+    return false;
+}
+
+
+unsigned int HashTree:: Add_Data_To_Tree(string new_data, vector<string> old_data){
+    old_data.push_back(new_data);
+    return Build_Hash_Tree(old_data);
+}
+
 //Creates hash value from sting key input. DJB2 hash funciton is used. This
 //can be changed by changing DJB2 call below to another hash function.
 unsigned int HashTree :: key_hash(std::string key){
     return DJB2(key);
 }
+
+
+
+
+
+/////////////////////////////////////////////////////////////////////////////////
+//BELOW ARE PRIVATE MEMBER FUNCTIONS THAT ARE LEFT PUBLIC FOR THE PURPOSE OF UNIT
+//TESTING AND DEMONSTRATING FUNCTIONALITY
+/////////////////////////////////////////////////////////////////////////////////
+
+
+
+
+
 
 //Initializes new hash tree node. This node can be added to the data_set
 shared_ptr<hash_tree_node> HashTree :: init_tree_node(std::string key){
@@ -105,50 +167,6 @@ shared_ptr<hash_tree_node> HashTree::create_hash_tree(vector<shared_ptr<hash_tre
 unsigned int HashTree :: Top_Hash(shared_ptr<hash_tree_node> top_hash){
     return top_hash->hashcode;
 }
-
-unsigned int HashTree :: Build_Hash_Tree(vector<string> data){
-
-    if (data.empty())
-    {
-        cout << "Please enter data to create the Hash Tree" << endl;
-        return 0;
-    }
-
-    vector<shared_ptr<hash_tree_node>> hash_data = init_data_set();
-
-    for (int i = 0; i < data.size(); i++)
-    {
-	   Insert(data[i],hash_data);
-    }
-
-    unsigned int top_hash = create_hash_tree(hash_data)->hashcode;
-    
-    return top_hash;
-}
-
-bool HashTree :: Identical_Data(vector <string> data_1, vector<string> data_2){
-
-    if (data_1.empty() && data_2.empty())
-    {
-        return true;
-    }
-    
-    else if (data_1.empty() || data_2.empty())
-    {
-        return false;
-    }
-    
-    unsigned int hash_data_1 = Build_Hash_Tree(data_1);
-    unsigned int hash_data_2 = Build_Hash_Tree(data_2);
-
-    if (hash_data_1 == hash_data_2)
-    {
-        return true;
-    }
-    return false;
-}
-
-
 
 
 

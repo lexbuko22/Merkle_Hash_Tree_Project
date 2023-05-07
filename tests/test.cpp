@@ -266,6 +266,16 @@ TEST_F(test_x,Is_Identical){
 	ASSERT_TRUE(test_5);
 }
 
+TEST_F(test_x,Add_Data_To_Tree){
+	HashTree myHashTree;
+	vector<string> data_set = {"apples"};
+	string new_data = "bananas";
+	unsigned int hash_val_apples = myHashTree.key_hash("apples");
+	unsigned int hash_val_bananas = myHashTree.key_hash("bananas");
+	unsigned int hash_val_combined = myHashTree.key_hash(to_string(hash_val_apples) + to_string(hash_val_bananas));
+	ASSERT_EQ(hash_val_combined,myHashTree.Add_Data_To_Tree(new_data,data_set));
+}
+
 
 // apples hash = 4065158538
 // bananas hash = 1707924825

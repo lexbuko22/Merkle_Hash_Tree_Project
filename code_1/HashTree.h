@@ -43,6 +43,29 @@ public:
   // freeing memory and you can leave this blank
   ~HashTree();
 
+  //Compares to vectors of string data using the hash tree data structure to determine if the data is identical.
+  //Returns truee if identical, false if not. Data is case sensitive but not order sensative
+  bool Identical_Data(vector <string> data_1, vector<string> data_2);
+
+  //Build Hash Tree creates a hash tree from a vector of string data and returns the top hash
+  unsigned int Build_Hash_Tree(vector<string> data);
+
+  //Add Data To Tree allows the user to add an item to their data vector and then create a new hash tree
+  //with one function call
+  unsigned int Add_Data_To_Tree(string new_data, vector<string> old_data);
+
+
+
+
+
+  ////////////////////////////////////////////////////////////////////////////////
+  // Below are private member functions left public for the purpose of unit
+  // testing and demonstrating functionality.
+  ////////////////////////////////////////////////////////////////////////////////
+
+
+
+
   //Creates hash value of string;
   unsigned int key_hash(std::string key);
 
@@ -69,16 +92,6 @@ public:
 
   //Inserts a string value into the data set
   void Insert(std::string key, vector<shared_ptr<hash_tree_node>> &data_set);
-
-  //Compares to vectors of string data using the hash tree data structure to determine if the data is identical.
-  //Returns truee if identical, false if not. Data is case sensitive but not order sensative
-  bool Identical_Data(vector <string> data_1, vector<string> data_2);
-
-  //Add_Key allows the user to add a key to the hash tree values and rehash the tree, creating a new
-  //top hash value.
-  unsigned int Build_Hash_Tree(vector<string> key);
-
-  //Create function to see all the keys hashed
 
 
   // you can add add more public member variables and member functions here if you need
