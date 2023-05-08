@@ -52,7 +52,7 @@ public:
 
   //Add Data To Tree allows the user to add an item to their data vector and then create a new hash tree
   //with one function call
-  unsigned int Add_Data_To_Tree(string new_data, vector<string> old_data);
+  unsigned int Add_Data_To_Tree(string new_data, vector<string> &old_data);
 
 
 

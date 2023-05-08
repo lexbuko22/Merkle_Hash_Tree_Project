@@ -10,4 +10,8 @@ For this implementation, the data is a vector of strings. The Hash Tree class ha
 Instructions:
 To compile the code, navigate to the build file and run the command make in the terminal. That will compile the code. The public member functions can then be called to compare data sets, build a hash tree, hash a value, or add a value to the data vector.
 
+This code can also be run from the app. To run this data structure from the app, create a new instance of the HashTree class. The member functions can then be used to compare two data set inputs as described above.
+
+C++ 11 should be used to compile this code.
+
 The input data for this hash tree class is a vector of string data.

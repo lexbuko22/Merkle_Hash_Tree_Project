@@ -52,7 +52,7 @@ bool HashTree :: Identical_Data(vector <string> data_1, vector<string> data_2){
 }
 
 
-unsigned int HashTree:: Add_Data_To_Tree(string new_data, vector<string> old_data){
+unsigned int HashTree:: Add_Data_To_Tree(string new_data, vector<string> &old_data){
     old_data.push_back(new_data);
     return Build_Hash_Tree(old_data);
 }
